@@ -10,9 +10,9 @@ class PryRescue
         begin
           before
 
-          example.binding.eval('@exception = nil')
+          example.binding.eval('@example.instance_variable_set(:@exception, nil)')
           example.run
-          if e = example.binding.eval('@exception')
+          if e = example.binding.eval('@example.instance_variable_get(:@exception)')
             Pry::rescued(e)
           end
 
